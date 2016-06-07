@@ -49,6 +49,17 @@ angular.module('shaman', ['ionic', 'shaman.controllers', 'shaman.services'])
         }
       }
     })
+
+    .state('tab.monitors-details', {
+        url: '/monitors/:monitorId',
+        views: {
+          'monitors': {
+            templateUrl: 'views/monitors/detail/monitor-detail.template.html',
+            controller: 'MonitorDetailCtrl'
+          }
+        }
+    })
+
     .state('tab.alerts', {
         url: '/alerts',
         views: {
@@ -78,16 +89,6 @@ angular.module('shaman', ['ionic', 'shaman.controllers', 'shaman.services'])
           }
         }
       });
-
-    // .state('tab.chat-detail', {
-    //   url: '/chats/:chatId',
-    //   views: {
-    //     'tab-chats': {
-    //       templateUrl: 'templates/chat-detail.html',
-    //       controller: 'ChatDetailCtrl'
-    //     }
-    //   }
-    // })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/monitors');

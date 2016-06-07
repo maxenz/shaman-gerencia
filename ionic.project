@@ -1,6 +1,6 @@
 {
   "name": "shamanGerencia",
-  "app_id": "",
+  "app_id": "b01b8d1f",
   "gulpStartupTasks": [
     "sass",
     "watch"

@@ -7,7 +7,7 @@
          Seleccione un monitor
        </div>
 
-      <a ng-repeat="monitor in monitorsCtrl.monitors" class="item item-icon-right" href="#">
+      <a ng-repeat="monitor in monitorsCtrl.monitors" class="item item-icon-right" ui-sref="tab.monitors-details({monitorId: monitor.id})">
         <i class="icon ion-ios-arrow-right"></i>
         {{ monitor.name }}
       </a>
