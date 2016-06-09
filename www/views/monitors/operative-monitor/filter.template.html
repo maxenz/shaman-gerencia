@@ -1,39 +1,44 @@
-<div class="list list-no-padding">
+<div>
 
-  <div class="item item-divider">
-    Seleccione los filtros
+  <div class="list list-no-padding">
+
+    <div class="item item-divider">
+      Seleccione los filtros
+    </div>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Organizar por
+      </div>
+      <select ng-model="operativeMonitorFilterCtrl.data.selected.groupingView"
+       ng-options="option.value as option.name for option
+        in operativeMonitorFilterCtrl.data.filters.groupingView">
+      </select>
+    </label>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Basado en
+      </div>
+      <select ng-model="operativeMonitorFilterCtrl.data.selected.queryMode"
+       ng-options="option.value as option.name for option
+        in operativeMonitorFilterCtrl.data.filters.queryMode">
+      </select>
+    </label>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Fecha
+      </div>
+
+    </label>
   </div>
 
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Organizar por
-    </div>
-    <select>
-      <option selected>Tipo de movil</option>
-      <option>Tipo de horario</option>
-      <option>Tipo de ambulancia</option>
-    </select>
-  </label>
-
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Basado en
-    </div>
-    <select>
-      <option selected>Horarios pactados</option>
-      <option>Horarios aleatorios</option>
-      <option>Horarios marcados</option>
-    </select>
-  </label>
-
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Fecha
-    </div>
-
-  </label>
+<div class="row">
+  <button class="button button-block button-balanced">
+    Buscar
+  </button>
 </div>
 
-<button class="button button-block button-balanced">
-  Buscar
-</button>
+
+</div>

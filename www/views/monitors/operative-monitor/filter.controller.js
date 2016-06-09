@@ -9,18 +9,34 @@
   OperativeMonitorFilterCtrl.$inject = [
     '$scope',
     '$ionicTabsDelegate',
-    '$cordovaDatePicker'
+    '$cordovaDatePicker',
+    'monitorService',
+    'operativeMonitorService'
   ]
 
   function OperativeMonitorFilterCtrl(
     $scope,
     $ionicTabsDelegate,
     $cordovaDatePicker,
+    monitorService,
+    operativeMonitorService,
     $stateParams
   ) {
 
     var vm = this;
     vm.data = {};
+    vm.data.selected = {};
+
+    vm.data.filters = monitorService.getFilters().operative;
+    vm.data.selected.groupingView = vm.data.filters.groupingView[0].value;
+    vm.data.selected.queryMode = vm.data.filters.queryMode[0].value;
+
+    var params = {};
+    params.groupingView = 0;
+    params.queryMode = 0;
+    operativeMonitorService.getMonitorsList(params);
+
+    console.log(vm.data.filters);
     var options = {
         date: new Date(),
         mode: 'date', // or 'time'
