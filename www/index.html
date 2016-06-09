@@ -12,22 +12,32 @@
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+
 
   <!-- your app's js -->
   <script src="js/app.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/services.js"></script>
+  <script src="js/modules.js"></script>
 
-  <!-- controllers -->
+  <!-- monitors -->
   <script src="views/monitors/monitors.controller.js"></script>
   <script src="views/monitors/detail/monitor-detail.controller.js"></script>
+  <script src="views/monitors/operative-monitor/filter.controller.js"></script>
+
+  <!-- alerts -->
   <script src="views/alerts/alerts.controller.js"></script>
+
+  <!-- operative -->
   <script src="views/operative/operative.controller.js"></script>
+
+  <!-- settings -->
   <script src="views/settings/settings.controller.js"></script>
 
+  <!-- directives -->
+  <script src="views/monitors/operative-monitor/filter.directive.js"></script>
 
   <!-- services -->
-  <script src="js/services/monitors.service.js"></script>
+
 
 </head>
 <body ng-app="shaman">

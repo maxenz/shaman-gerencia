@@ -5,7 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('shaman', ['ionic', 'shaman.controllers', 'shaman.services'])
+angular.module('shaman', [
+  'ionic',
+  'shaman.controllers',
+  'shaman.services',
+  'shaman.directives',
+  'ngCordova'
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -32,7 +38,7 @@ angular.module('shaman', ['ionic', 'shaman.controllers', 'shaman.services'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'views/tabs.html'
@@ -41,54 +47,54 @@ angular.module('shaman', ['ionic', 'shaman.controllers', 'shaman.services'])
   // Each tab has its own nav history stack:
 
   .state('tab.monitors', {
-      url: '/monitors',
-      views: {
-        'monitors': {
-          templateUrl: 'views/monitors/monitors.template.html',
-          controller: 'MonitorsCtrl'
-        }
+    url: '/monitors',
+    views: {
+      'monitors': {
+        templateUrl: 'views/monitors/monitors.template.html',
+        controller: 'MonitorsCtrl'
       }
-    })
+    }
+  })
 
-    .state('tab.monitors-details', {
-        url: '/monitors/:monitorId',
-        views: {
-          'monitors': {
-            templateUrl: 'views/monitors/detail/monitor-detail.template.html',
-            controller: 'MonitorDetailCtrl'
-          }
-        }
-    })
+  .state('tab.monitors-details', {
+    url: '/monitors/:monitorId',
+    views: {
+      'monitors': {
+        templateUrl: 'views/monitors/detail/monitor-detail.template.html',
+        controller: 'MonitorDetailCtrl'
+      }
+    }
+  })
 
-    .state('tab.alerts', {
-        url: '/alerts',
-        views: {
-          'alerts': {
-            templateUrl: 'views/alerts/alerts.template.html',
-            controller: 'AlertsCtrl'
-          }
-        }
-      })
+  .state('tab.alerts', {
+    url: '/alerts',
+    views: {
+      'alerts': {
+        templateUrl: 'views/alerts/alerts.template.html',
+        controller: 'AlertsCtrl'
+      }
+    }
+  })
 
-      .state('tab.operative', {
-        url: '/operative',
-        views: {
-          'operative': {
-            templateUrl: 'views/operative/operative.template.html',
-            controller: 'OperativeCtrl'
-          }
-        }
-      })
+  .state('tab.operative', {
+    url: '/operative',
+    views: {
+      'operative': {
+        templateUrl: 'views/operative/operative.template.html',
+        controller: 'OperativeCtrl'
+      }
+    }
+  })
 
-      .state('tab.settings', {
-        url: '/settings',
-        views: {
-          'settings': {
-            templateUrl: 'views/settings/settings.template.html',
-            controller: 'SettingsCtrl'
-          }
-        }
-      });
+  .state('tab.settings', {
+    url: '/settings',
+    views: {
+      'settings': {
+        templateUrl: 'views/settings/settings.template.html',
+        controller: 'SettingsCtrl'
+      }
+    }
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/monitors');
