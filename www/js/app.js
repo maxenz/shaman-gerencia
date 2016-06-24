@@ -10,7 +10,8 @@ angular.module('shaman', [
   'shaman.controllers',
   'shaman.services',
   'shaman.directives',
-  'ngCordova'
+  'ngCordova',
+  'angularMoment'
 ])
 
 .run(function($ionicPlatform) {

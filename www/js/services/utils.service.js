@@ -4,10 +4,17 @@
   .module('shaman.services')
   .factory('utilsService', utilsService);
 
-  function utilsService() {
+  utilsService.$inject = [
+    '$ionicPopup',
+    '$ionicLoading'
+  ];
+
+  function utilsService($ionicPopup, $ionicLoading) {
 
     var service = {
-      toCamel : toCamel
+      toCamel     : toCamel,
+      showAlert   : showAlert,
+      showLoading : showLoading
     };
 
     return service;
@@ -44,6 +51,19 @@
         }
       }
       return build;
+    }
+
+    function showAlert(title, message) {
+      $ionicPopup.alert({
+        title : title,
+        template: message
+      });
+    }
+
+    function showLoading(template) {
+      $ionicLoading.show({
+        template: template
+      });
     }
 
   }

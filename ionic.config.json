@@ -1,0 +1,12 @@
+{
+  "name": "shamanGerencia",
+  "app_id": "b01b8d1f",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

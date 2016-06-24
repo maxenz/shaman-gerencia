@@ -9820,3 +9820,6 @@ a.button {
 
 div.list.list-no-padding {
   padding-top: 0; }
+
+.text-align-right {
+  text-align: right !important; }

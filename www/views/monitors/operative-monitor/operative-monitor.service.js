@@ -17,30 +17,39 @@
   ) {
 
     var service = {
-      getMonitorsList : getMonitorsList
+      getMonitorsList   : getMonitorsList,
+      parseMonitorsList : parseMonitorsList,
+      monitors          : []
     };
 
     return service;
 
     function getMonitorsList (params) {
 
+      var pDateTime = "";
+
+      // --> Si el filtro de fecha no es el default, o sea, el actual ...
+      if (params.actualDate) {
+        var pDate = moment(params.actualDate).format('YYYY-MM-DD');
+        var pTime = moment(params.actualTime).format('HH:mm:SS');
+        pDateTime = pDate + ' ' + pTime;
+      }
+
       var soap_method = 'soap_method=GetMonitorArmadoOperativo';
       var pView = '&pAgp=' + params.groupingView;
       var pMode = '&pModCal=' + params.queryMode;
-      var pDate = '&pFhrQry=';
+      var pDate = '&pFhrQry=' + pDateTime;
 
       var url = URLS.operativeGrid + soap_method + pView + pMode + pDate;
 
-      $http.get(url)
-      .then(
-        function(response) {
-          var responseParsed = utilsService.toCamel($.xml2json(response.data));
-          var responseMonitor = responseParsed.body.getMonitorArmadoOperativoResponse;
-          var monitors = responseMonitor.getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
-          console.log(monitors);
-          return monitors;
-        }
-      );
+      return $http.get(url);
+    }
+
+    function parseMonitorsList(response) {
+      var responseParsed  = utilsService.toCamel($.xml2json(response.data));
+      var responseMonitor = responseParsed.body.getMonitorArmadoOperativoResponse;
+      var monitors        = responseMonitor.getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
+      service.monitors    = monitors;
     }
 
 
