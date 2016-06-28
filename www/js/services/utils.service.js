@@ -6,15 +6,25 @@
 
   utilsService.$inject = [
     '$ionicPopup',
-    '$ionicLoading'
+    '$ionicLoading',
+    '$http',
+    '$q'
   ];
 
-  function utilsService($ionicPopup, $ionicLoading) {
+  function utilsService(
+    $ionicPopup,
+    $ionicLoading,
+    $http,
+    $q
+  ) {
 
     var service = {
-      toCamel     : toCamel,
-      showAlert   : showAlert,
-      showLoading : showLoading
+      toCamel                 : toCamel,
+      showAlert               : showAlert,
+      showLoading             : showLoading,
+      getPromise              : getPromise,
+      executeMultipleRequests : executeMultipleRequests,
+      xmlToJsonResponse       : xmlToJsonResponse
     };
 
     return service;
@@ -64,6 +74,29 @@
       $ionicLoading.show({
         template: template
       });
+    }
+    
+    function getPromise(url) {
+      return $http.get(url);
+    }
+
+    function executeMultipleRequests(promises) {
+
+      var deferred = $q.defer();
+
+      $q.all(promises)
+      .then(function (results) {
+        deferred.resolve(results);
+      },
+      function (errors) {
+        deferred.reject(errors);
+      });
+
+      return deferred.promise;
+    }
+
+    function xmlToJsonResponse(response) {
+      return toCamel($.xml2json(response)).body;
     }
 
   }

@@ -9823,3 +9823,12 @@ div.list.list-no-padding {
 
 .text-align-right {
   text-align: right !important; }
+
+.color-balanced {
+  color: #70a231 !important; }
+
+.bold {
+  font-weight: bold; }
+
+.margin-right-7-percent {
+  margin-right: 7%; }

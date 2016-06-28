@@ -1,0 +1,35 @@
+<div class="list list-no-padding">
+
+  <div class="item item-divider">
+    Resultados de la búsqueda
+  </div>
+
+  <div ng-repeat="monitor in operativeMonitorActivityCtrl.monitors">
+    <div class="item item-stable" ng-click="operativeMonitorActivityCtrl.toggleGroup(monitor)"
+    ng-class="{active : operativeMonitorActivityCtrl.isGroupShown(monitor)}">
+      <div style="float:left">
+        <h2><i class="icon padding-right-7-percent" ng-class="operativeMonitorActivityCtrl.isGroupShown(monitor) ? 'ion-minus-circled' : 'ion-plus-circled'"></i>
+         {{  monitor.tipoMovil  }}</h2>
+        <p>{{  monitor.conformidad  }}% de conformidad</p>
+      </div>
+      <div style="float:right">
+        <p class="color-balanced bold">{{  monitor.esperados  }} Esp.</p>
+        <p class="color-balanced bold">{{ monitor.activos  }} Act.</p>
+      </div>
+
+  </div>
+  <div class="item item-accordion" ng-repeat="det in monitor.detail"
+  ng-show="operativeMonitorActivityCtrl.isGroupShown(monitor)">
+  <div style="float:left">
+    <h2>Móvil {{  det.movilId  }}</h2>
+    <p>Activo {{  det.activo  }}</p>
+  </div>
+  <div style="float:right">
+    <p class="bold">{{  det.propietario  }}</p>
+    <p class="bold">{{  det.estado  }} </p>
+  </div>
+</div>
+</div>
+
+
+</div>

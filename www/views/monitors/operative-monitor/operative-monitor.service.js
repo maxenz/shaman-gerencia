@@ -7,13 +7,15 @@
   operativeMonitorService.$inject = [
     'URLS',
     '$http',
-    'utilsService'
+    'utilsService',
+    '$log'
   ];
 
   function operativeMonitorService(
     URLS,
     $http,
-    utilsService
+    utilsService,
+    $log
   ) {
 
     var service = {
@@ -35,21 +37,62 @@
         pDateTime = pDate + ' ' + pTime;
       }
 
-      var soap_method = 'soap_method=GetMonitorArmadoOperativo';
-      var pView = '&pAgp=' + params.groupingView;
-      var pMode = '&pModCal=' + params.queryMode;
-      var pDate = '&pFhrQry=' + pDateTime;
+      var soapMethodList   = 'soap_method=GetMonitorArmadoOperativo';
+      var soapMethodDetail = 'soap_method=GetMonitorArmadoOperativoDetalle';
+      var pView            = '&pAgp=' + params.groupingView;
+      var pMode            = '&pModCal=' + params.queryMode;
+      var pDate            = '&pFhrQry=' + pDateTime;
 
-      var url = URLS.operativeGrid + soap_method + pView + pMode + pDate;
+      var promiseList   = utilsService.getPromise(URLS.operativeGrid + soapMethodList + pView + pMode + pDate);
+      var promiseDetail = utilsService.getPromise(URLS.operativeGrid + soapMethodDetail + pView + pMode + pDate);
+      var promises      = { list: promiseList, detail: promiseDetail};
 
-      return $http.get(url);
+      return utilsService.executeMultipleRequests(promises);
+
     }
 
     function parseMonitorsList(response) {
-      var responseParsed  = utilsService.toCamel($.xml2json(response.data));
-      var responseMonitor = responseParsed.body.getMonitorArmadoOperativoResponse;
-      var monitors        = responseMonitor.getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
-      service.monitors    = monitors;
+
+      var jsonMonitorsList = utilsService.xmlToJsonResponse(response.list.data);
+      service.monitors     = jsonMonitorsList.getMonitorArmadoOperativoResponse
+      .getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
+
+      var jsonMonitorsDetailList = utilsService.xmlToJsonResponse(response.detail.data);
+      var detail = jsonMonitorsDetailList.getMonitorArmadoOperativoDetalleResponse
+      .getMonitorArmadoOperativoDetalleResult.diffgram.defaultDataSet.sQL;
+      setDetailsToMonitorList(detail);
+
+    }
+
+    function setDetailsToMonitorList(detail) {
+
+      for (var i = 0; i < service.monitors.length; i++) {
+        service.monitors[i].tipoMovil = parsedTipoMovil(service.monitors[i]);
+        service.monitors[i].detail = [];
+        for (var j = 0; j < detail.length; j++) {
+          if (detail[j].tipoMovilId === service.monitors[i].id) {
+            service.monitors[i].detail.push(detail[j]);
+          }
+        }
+      }
+
+    }
+
+    function parsedTipoMovil(monitor) {
+      if (monitor.tipoMovil.indexOf('-') > -1) {
+        var splitted = monitor.tipoMovil.split('-');
+        var description = capitalizeFirstLetter(splitted[1].toLowerCase().trim());
+        var category = splitted[0];
+        return category + ' - ' + description;
+      }
+
+      return capitalizeFirstLetter(monitor.tipoMovil.toLowerCase().trim());
+
+
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
 
