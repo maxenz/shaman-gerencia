@@ -69,7 +69,9 @@
       for (var i = 0; i < service.monitors.length; i++) {
         service.monitors[i].tipoMovil = parsedTipoMovil(service.monitors[i]);
         service.monitors[i].detail = [];
+        service.monitors[i].lessThan90PercentAccordance = parseInt(service.monitors[i].conformidad) < 90;
         for (var j = 0; j < detail.length; j++) {
+          detail[j].activeImageIcon = getActiveImageIcon(detail[j]);
           if (detail[j].tipoMovilId === service.monitors[i].id) {
             service.monitors[i].detail.push(detail[j]);
           }
@@ -79,15 +81,14 @@
     }
 
     function parsedTipoMovil(monitor) {
+
       if (monitor.tipoMovil.indexOf('-') > -1) {
         var splitted = monitor.tipoMovil.split('-');
         var description = capitalizeFirstLetter(splitted[1].toLowerCase().trim());
         var category = splitted[0];
         return category + ' - ' + description;
       }
-
       return capitalizeFirstLetter(monitor.tipoMovil.toLowerCase().trim());
-
 
     }
 
@@ -95,8 +96,19 @@
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    function getActiveImageIcon(detail) {
+      switch (parseInt(detail.activo)) {
+        case 0:
+        return "ion-close-circled color-assertive";
+        case 1:
+        return "ion-checkmark-circled color-balanced";
+        case 2:
+        return "ion-calendar color-positive";
+        case 3:
+        return "ion-refresh color-positive";
+      }
+    }
 
   }
-
 
 }());
