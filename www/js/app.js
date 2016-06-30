@@ -11,7 +11,8 @@ angular.module('shaman', [
   'shaman.services',
   'shaman.directives',
   'ngCordova',
-  'angularMoment'
+  'angularMoment',
+  'chart.js'
 ])
 
 .run(function($ionicPlatform) {

@@ -1,27 +1,33 @@
-  <ion-view view-title="Detalle de Monitor" ng-controller="MonitorDetailCtrl as monitorDetailCtrl">
-    <ion-pane>
-      <ion-tabs class="tabs-icon-top tabs-color-active-balanced tabs-top" delegate-handle='monitor-tabs-handle'>
+<ion-view view-title="Detalle de Monitor" ng-controller="MonitorDetailCtrl as monitorDetailCtrl">
+  <ion-pane>
+    <ion-tabs class="tabs-icon-top tabs-color-active-balanced tabs-top" delegate-handle='monitor-tabs-handle'>
 
-        <ion-tab title="Filtros" icon-on="ion-ios-search-strong" icon-off="ion-ios-search">
-          <ion-pane>
+      <ion-tab title="Filtros" icon-on="ion-ios-search-strong" icon-off="ion-ios-search">
+        <ion-pane>
           <ion-content>
             <operative-monitor-filter></operative-monitor-filter>
           </ion-content>
         </ion-pane>
-        </ion-tab>
+      </ion-tab>
 
-        <ion-tab title="Actividad" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
-          <ion-pane>
-            <ion-content>
-              <operative-monitor-activity></operative-monitor-activity>
-            </ion-content>
-          </ion-pane>
-        </ion-tab>
+      <ion-tab title="Actividad" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+        <ion-pane>
+          <ion-content>
+            <operative-monitor-activity></operative-monitor-activity>
+          </ion-content>
+        </ion-pane>
+      </ion-tab>
 
-        <ion-tab title="Gráficos" icon-on="ion-ios-pie" icon-off="ion-ios-pie-outline">
-          Gráficos
-        </ion-tab>
+      <ion-tab title="Gráficos" icon-on="ion-ios-pie" icon-off="ion-ios-pie-outline" on-select="ngGridFix()">
+        <ion-pane>
+          <ion-content>
+            <operative-monitor-chart></operative-monitor-chart>
+          </ion-content>
+        </ion-pane>
+      </ion-tab>
 
-      </ion-tabs>
-  </ion-pane>
-  </ion-view>
+    </ion-tab>
+
+  </ion-tabs>
+</ion-pane>
+</ion-view>

@@ -21,7 +21,9 @@
     var service = {
       getMonitorsList   : getMonitorsList,
       parseMonitorsList : parseMonitorsList,
-      monitors          : []
+      monitors          : [],
+      chartLabels       : [],
+      chartData         : []
     };
 
     return service;
@@ -53,6 +55,8 @@
 
     function parseMonitorsList(response) {
 
+      service.chartData    = [];
+      service.chartLabels  = [];
       var jsonMonitorsList = utilsService.xmlToJsonResponse(response.list.data);
       service.monitors     = jsonMonitorsList.getMonitorArmadoOperativoResponse
       .getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
@@ -67,6 +71,7 @@
     function setDetailsToMonitorList(detail) {
 
       for (var i = 0; i < service.monitors.length; i++) {
+        setMonitorDataForChart(i);
         service.monitors[i].tipoMovil = parsedTipoMovil(service.monitors[i]);
         service.monitors[i].detail = [];
         service.monitors[i].lessThan90PercentAccordance = parseInt(service.monitors[i].conformidad) < 90;
@@ -107,6 +112,11 @@
         case 3:
         return "ion-refresh color-positive";
       }
+    }
+
+    function setMonitorDataForChart(i) {
+      service.chartData.push(parseInt(service.monitors[i].conformidad));
+      service.chartLabels.push(service.monitors[i].tipoMovil);
     }
 
   }
