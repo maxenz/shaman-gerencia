@@ -20,10 +20,7 @@
 
     var service = {
       getMonitorsList   : getMonitorsList,
-      parseMonitorsList : parseMonitorsList,
-      monitors          : [],
-      chartLabels       : [],
-      chartData         : []
+      parseMonitorsList : parseMonitorsList
     };
 
     return service;
@@ -45,9 +42,9 @@
       var pMode            = '&pModCal=' + params.queryMode;
       var pDate            = '&pFhrQry=' + pDateTime;
 
-      var promiseList   = utilsService.getPromise(URLS.operativeGrid + soapMethodList + pView + pMode + pDate);
-      var promiseDetail = utilsService.getPromise(URLS.operativeGrid + soapMethodDetail + pView + pMode + pDate);
-      var promises      = { list: promiseList, detail: promiseDetail};
+      var promiseList      = utilsService.getPromise(URLS.operativeGrid + soapMethodList + pView + pMode + pDate);
+      var promiseDetail    = utilsService.getPromise(URLS.operativeGrid + soapMethodDetail + pView + pMode + pDate);
+      var promises         = { list: promiseList, detail: promiseDetail};
 
       return utilsService.executeMultipleRequests(promises);
 
@@ -89,16 +86,12 @@
 
       if (monitor.tipoMovil.indexOf('-') > -1) {
         var splitted = monitor.tipoMovil.split('-');
-        var description = capitalizeFirstLetter(splitted[1].toLowerCase().trim());
+        var description = utilsService.capitalizeFirstLetter(splitted[1].toLowerCase().trim());
         var category = splitted[0];
         return category + ' - ' + description;
       }
-      return capitalizeFirstLetter(monitor.tipoMovil.toLowerCase().trim());
+      return utilsService.capitalizeFirstLetter(monitor.tipoMovil.toLowerCase().trim());
 
-    }
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     function getActiveImageIcon(detail) {

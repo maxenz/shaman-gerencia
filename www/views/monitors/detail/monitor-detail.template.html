@@ -1,11 +1,12 @@
-<ion-view view-title="Detalle de Monitor" ng-controller="MonitorDetailCtrl as monitorDetailCtrl">
+<ion-view view-title="Detalle de Monitor">
   <ion-pane>
     <ion-tabs class="tabs-icon-top tabs-color-active-balanced tabs-top" delegate-handle='monitor-tabs-handle'>
 
       <ion-tab title="Filtros" icon-on="ion-ios-search-strong" icon-off="ion-ios-search">
         <ion-pane>
           <ion-content>
-            <operative-monitor-filter></operative-monitor-filter>
+            <operative-monitor-filter ng-if="monitorDetailCtrl.showOperativeMonitor"></operative-monitor-filter>
+            <mobiles-budget-filter ng-if="monitorDetailCtrl.showMobilesBudgetMonitor"></mobiles-budget-filter>
           </ion-content>
         </ion-pane>
       </ion-tab>
@@ -21,7 +22,8 @@
       <ion-tab title="Gráficos" icon-on="ion-ios-pie" icon-off="ion-ios-pie-outline" on-select="ngGridFix()">
         <ion-pane>
           <ion-content>
-            <operative-monitor-chart></operative-monitor-chart>
+            <operative-monitor-chart ng-if="monitorDetailCtrl.showOperativeMonitor"></operative-monitor-chart>
+            <mobiles-budget-chart ng-if="monitorDetailCtrl.showMobilesBudgetMonitor"></mobiles-budget-chart>
           </ion-content>
         </ion-pane>
       </ion-tab>

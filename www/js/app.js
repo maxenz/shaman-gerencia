@@ -63,7 +63,13 @@ angular.module('shaman', [
     views: {
       'monitors': {
         templateUrl: 'views/monitors/detail/monitor-detail.template.html',
-        controller: 'MonitorDetailCtrl'
+        controller: 'MonitorDetailCtrl',
+        controllerAs : 'monitorDetailCtrl',
+        resolve: {
+          _mobileTypes : function(monitorService) {
+            return monitorService.getMobileTypes();
+          }
+        }
       }
     }
   })

@@ -7,18 +7,36 @@
   .controller('MonitorDetailCtrl', MonitorDetailCtrl);
 
   MonitorDetailCtrl.$inject = [
+    '_mobileTypes',
     '$scope',
-    '$ionicTabsDelegate'
+    'monitorService',
+    '$ionicTabsDelegate',
+    '$stateParams'
   ]
 
-  function MonitorDetailCtrl($scope, $ionicTabsDelegate, $stateParams) {
+  function MonitorDetailCtrl(
+    _mobileTypes,
+    $scope,
+    monitorService,
+    $ionicTabsDelegate,
+    $stateParams
+  ) {
 
     var vm = this;
+    activate();
 
-    vm.monitor = { id: 1, name: 'Armado Operativo'} ;
+    function activate() {
 
-    vm.selectSecondTab = function () {
-      $ionicTabsDelegate.$getByHandle('monitor-tabs-handle').select(1);
+      vm.showOperativeMonitor = parseInt($stateParams.monitorId) === 1;
+      vm.showMobilesBudgetMonitor = parseInt($stateParams.monitorId) === 2;
+
+      monitorService.parseMobileTypes(_mobileTypes);
+      monitorService.setFilters();
+
+      vm.selectSecondTab = function () {
+        $ionicTabsDelegate.$getByHandle('monitor-tabs-handle').select(1);
+      }
+
     }
 
   }

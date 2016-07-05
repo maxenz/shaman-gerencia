@@ -24,7 +24,8 @@
       showLoading             : showLoading,
       getPromise              : getPromise,
       executeMultipleRequests : executeMultipleRequests,
-      xmlToJsonResponse       : xmlToJsonResponse
+      xmlToJsonResponse       : xmlToJsonResponse,
+      capitalizeFirstLetter   : capitalizeFirstLetter
     };
 
     return service;
@@ -75,7 +76,7 @@
         template: template
       });
     }
-    
+
     function getPromise(url) {
       return $http.get(url);
     }
@@ -97,6 +98,10 @@
 
     function xmlToJsonResponse(response) {
       return toCamel($.xml2json(response)).body;
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
   }

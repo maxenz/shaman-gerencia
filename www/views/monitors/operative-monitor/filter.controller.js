@@ -31,7 +31,7 @@
     function activate() {
 
       vm.data                       = {};
-      vm.data.filters               = monitorService.getFilters().operative;
+      vm.data.filters               = monitorService.filters.operative;
       vm.data.selected              = {};
       vm.data.selected.groupingView = vm.data.filters.groupingView[0].value;
       vm.data.selected.queryMode    = vm.data.filters.queryMode[0].value;
@@ -51,7 +51,6 @@
       .then(
         function(response) {
           operativeMonitorService.parseMonitorsList(response);
-          console.log(operativeMonitorService.monitors);
           $ionicTabsDelegate.$getByHandle('monitor-tabs-handle').select(1);
           $ionicLoading.hide();
         },
