@@ -30,7 +30,7 @@
 
     function activate() {
 
-      vm.monitors = operativeMonitorService.monitors;
+      vm.opMonitorService = operativeMonitorService;
 
       vm.toggleGroup = function(group) {
         if (vm.isGroupShown(group)) {
@@ -43,7 +43,7 @@
       vm.isGroupShown = function(group) {
         return vm.shownGroup === group;
       };
-          
+
     }
 
   }

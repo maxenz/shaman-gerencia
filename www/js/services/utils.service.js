@@ -25,7 +25,8 @@
       getPromise              : getPromise,
       executeMultipleRequests : executeMultipleRequests,
       xmlToJsonResponse       : xmlToJsonResponse,
-      capitalizeFirstLetter   : capitalizeFirstLetter
+      capitalizeFirstLetter   : capitalizeFirstLetter,
+      uniqueArray             : uniqueArray
     };
 
     return service;
@@ -102,6 +103,23 @@
 
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function uniqueArray(vec) {
+      var arr = [];
+      for(var i = 0; i < vec.length; i++) {
+        if(!contains(vec[i], arr)) {
+          arr.push(vec[i]);
+        }
+      }
+      return arr;
+    }
+
+    function contains(v, vec) {
+      for(var i = 0; i < vec.length; i++) {
+        if(vec[i] === v) return true;
+      }
+      return false;
     }
 
   }

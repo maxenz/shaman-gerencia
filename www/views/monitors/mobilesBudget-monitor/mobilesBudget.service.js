@@ -86,7 +86,7 @@
         if (proyecto) chartLabels.push(proyecto);
       }
 
-      return chartLabels.unique();
+      return utilsService.uniqueArray(chartLabels);
     }
 
     function getChartArray(uniqueProjects) {
@@ -114,15 +114,18 @@
     }
 
     function parseDataForChart(chart) {
+
       service.chartLabels = [];
       service.chartEspServicios = [];
       service.chartOpeServicios = [];
 
       for (var i = 0; i < chart.length; i++) {
-        service.chartLabels.push(chart[i].proyecto);
+        var proyectName = chart[i].proyecto.split(")")[1];
+        service.chartLabels.push(proyectName);
         service.chartEspServicios.push(chart[i].espServicios);
         service.chartOpeServicios.push(chart[i].opeServicios);
       }
+      
     }
 
   }

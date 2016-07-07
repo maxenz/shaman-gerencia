@@ -4,7 +4,7 @@
     Resultados de la búsqueda
   </div>
 
-  <div ng-repeat="monitor in operativeMonitorActivityCtrl.monitors">
+  <div ng-repeat="monitor in operativeMonitorActivityCtrl.opMonitorService.monitors">
     <div class="item item-stable" ng-click="operativeMonitorActivityCtrl.toggleGroup(monitor)"
     ng-class="{active : operativeMonitorActivityCtrl.isGroupShown(monitor)}">
     <div class="row">

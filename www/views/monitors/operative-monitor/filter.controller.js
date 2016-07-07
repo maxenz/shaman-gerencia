@@ -33,8 +33,8 @@
       vm.data                       = {};
       vm.data.filters               = monitorService.filters.operative;
       vm.data.selected              = {};
-      vm.data.selected.groupingView = vm.data.filters.groupingView[0].value;
-      vm.data.selected.queryMode    = vm.data.filters.queryMode[0].value;
+      vm.data.selected.groupingView = vm.data.filters.groupingView[1].value;
+      vm.data.selected.queryMode    = vm.data.filters.queryMode[1].value;
 
       vm.search = search;
       search();

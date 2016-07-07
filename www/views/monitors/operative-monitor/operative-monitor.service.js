@@ -20,7 +20,8 @@
 
     var service = {
       getMonitorsList   : getMonitorsList,
-      parseMonitorsList : parseMonitorsList
+      parseMonitorsList : parseMonitorsList,
+      monitors          : []
     };
 
     return service;
@@ -55,17 +56,10 @@
       service.chartData    = [];
       service.chartLabels  = [];
       var jsonMonitorsList = utilsService.xmlToJsonResponse(response.list.data);
-      var monitors     = jsonMonitorsList.getMonitorArmadoOperativoResponse
+      service.monitors     = jsonMonitorsList.getMonitorArmadoOperativoResponse
       .getMonitorArmadoOperativoResult.diffgram.defaultDataSet.sQL;
-      service.monitors = [];
 
-      // Esto lo hago porque me vienen los ultimos dos registros como
-      // funciones, pero no tienen informacion. rarisimo.
-      for (var i = 0 ; i < monitors.length; i++) {
-        if (monitors[i] !== null && typeof monitors[i] === 'object') {
-          service.monitors.push(monitors[i]);
-        }
-      }
+      console.log(service.monitors);
 
       var jsonMonitorsDetailList = utilsService.xmlToJsonResponse(response.detail.data);
       var detail = jsonMonitorsDetailList.getMonitorArmadoOperativoDetalleResponse
