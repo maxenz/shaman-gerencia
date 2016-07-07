@@ -28,12 +28,18 @@
         vm.graph = {};
         vm.graph.labels = mobilesBudgetService.chartLabels;
         vm.graph.series = ['Realizado', 'Objetivo'];
-        vm.graph.data = [mobilesBudgetService.chartDataRealized, mobilesBudgetService.chartDataObjective];
+        vm.graph.data = [mobilesBudgetService.chartOpeServicios, mobilesBudgetService.chartEspServicios];
         vm.graph.colours =  [{
           "fillColor": "#e74c3c",
           "strokeColor": "#e74c3c",
           "pointColor": "#e74c3c"
-        }];
+        },
+        {
+          "fillColor": "#8bc541",
+          "strokeColor": "#8bc541",
+          "pointColor": "#8bc541"
+        }
+      ];
 
     }
 

@@ -46,9 +46,6 @@
 
     function parseMobiles(response) {
 
-      service.chartDataRealized  = [];
-      service.chartDataObjective = [];
-      service.chartLabels        = [];
       var jsonMonitorsList       = utilsService.xmlToJsonResponse(response.mobiles.data);
       service.mobiles            = jsonMonitorsList.getMonitorPresupuestoMovilesResponse
       .getMonitorPresupuestoMovilesResult.diffgram.defaultDataSet.sQL;
@@ -70,12 +67,62 @@
     //
 
     function setChartData() {
+
+      var uniqueProjects = getUniqueProjects();
+
+      var chart = getChartArray(uniqueProjects);
+
+      setSeriesDataInChart(chart);
+
+      parseDataForChart(chart);
+
+    }
+
+    function getUniqueProjects() {
+
+      var chartLabels = [];
       for (var i = 0; i < service.mobiles.length; i++) {
-        service.chartDataObjective.push(parseInt(service.mobiles[i].espServicios));
-        service.chartDataRealized.push(parseInt(service.mobiles[i].opeServicios));
-        service.chartLabels.push(service.mobiles[i].proyecto);
+        var proyecto = service.mobiles[i].proyecto;
+        if (proyecto) chartLabels.push(proyecto);
       }
 
+      return chartLabels.unique();
+    }
+
+    function getChartArray(uniqueProjects) {
+      var chart = [];
+      for (var i = 0; i < uniqueProjects.length ; i++) {
+        var obj = new Object();
+        obj.proyecto = uniqueProjects[i];
+        obj.espServicios = 0;
+        obj.opeServicios = 0;
+        chart.push(obj);
+      }
+
+      return chart;
+    }
+
+    function setSeriesDataInChart(chart) {
+      for (var i = 0; i < service.mobiles.length; i++) {
+        for (var j = 0; j < chart.length; j++) {
+          if (chart[j].proyecto === service.mobiles[i].proyecto) {
+            chart[j].espServicios =+ service.mobiles[i].espServicios;
+            chart[j].opeServicios =+ service.mobiles[i].opeServicios;
+          }
+        }
+      }
+    }
+
+    function parseDataForChart(chart) {
+      service.chartLabels = [];
+      service.chartEspServicios = [];
+      service.chartOpeServicios = [];
+
+      for (var i = 0; i < chart.length; i++) {
+        service.chartLabels.push(chart[i].proyecto);
+        service.chartEspServicios.push(chart[i].espServicios);
+        service.chartOpeServicios.push(chart[i].opeServicios);
+      }
     }
 
   }
