@@ -20,7 +20,8 @@
 
     var service = {
       getMobiles         : getMobiles,
-      parseMobiles       : parseMobiles
+      parseMobiles       : parseMobiles,
+      dataForActivity    : []
     };
 
     return service;
@@ -53,27 +54,11 @@
 
     }
 
-    // function parseMobiles(monitor) {
-    //
-    //   if (monitor.tipoMovil.indexOf('-') > -1) {
-    //     var splitted = monitor.tipoMovil.split('-');
-    //     var description = utilsService.capitalizeFirstLetter(splitted[1].toLowerCase().trim());
-    //     var category = splitted[0];
-    //     return category + ' - ' + description;
-    //   }
-    //   return utilsService.capitalizeFirstLetter(monitor.tipoMovil.toLowerCase().trim());
-    //
-    // }
-    //
-
     function setChartData() {
 
       var uniqueProjects = getUniqueProjects();
-
       var chart = getChartArray(uniqueProjects);
-
       setSeriesDataInChart(chart);
-
       parseDataForChart(chart);
 
     }
@@ -96,6 +81,7 @@
         obj.proyecto = uniqueProjects[i];
         obj.espServicios = 0;
         obj.opeServicios = 0;
+        obj.detail       = [];
         chart.push(obj);
       }
 
@@ -108,9 +94,15 @@
           if (chart[j].proyecto === service.mobiles[i].proyecto) {
             chart[j].espServicios =+ service.mobiles[i].espServicios;
             chart[j].opeServicios =+ service.mobiles[i].opeServicios;
+            chart[j].desvio       =+ service.mobiles[i].desvio;
+            chart[j].detail.push(service.mobiles[i]);
           }
         }
       }
+
+      service.dataForActivity = chart;
+      console.log(service.dataForActivity);
+
     }
 
     function parseDataForChart(chart) {
@@ -125,7 +117,7 @@
         service.chartEspServicios.push(chart[i].espServicios);
         service.chartOpeServicios.push(chart[i].opeServicios);
       }
-      
+
     }
 
   }

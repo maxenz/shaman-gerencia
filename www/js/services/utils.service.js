@@ -26,7 +26,8 @@
       executeMultipleRequests : executeMultipleRequests,
       xmlToJsonResponse       : xmlToJsonResponse,
       capitalizeFirstLetter   : capitalizeFirstLetter,
-      uniqueArray             : uniqueArray
+      uniqueArray             : uniqueArray,
+      minutesToTime           : minutesToTime
     };
 
     return service;
@@ -120,6 +121,17 @@
         if(vec[i] === v) return true;
       }
       return false;
+    }
+
+    function minutesToTime(minutes) {
+      minutes = parseInt(minutes);
+      var hours = moment.duration(minutes,'minutes').asHours();
+      var justHour = Math.floor(hours);
+      var decimalPart = hours % 1;
+      var justMinutes = parseInt(moment.duration(decimalPart, 'hours').asMinutes());
+
+      var fmtMinutes = justMinutes < 10 ? '0' + justMinutes : justMinutes;
+      return justHour + ':' + fmtMinutes;
     }
 
   }
