@@ -9841,3 +9841,18 @@ div.list.list-no-padding {
 
 .color-black {
   color: black; }
+
+.padding-right-5 {
+  padding-right: 5px; }
+
+.col-mobiles-budget-detail-left {
+  border-right: 2px solid #e74c3c; }
+
+.text-center {
+  text-align: center; }
+
+.no-padding {
+  padding: 0px !important; }
+
+.padding-2 {
+  padding: 2px !important; }

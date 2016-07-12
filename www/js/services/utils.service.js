@@ -131,7 +131,8 @@
       var justMinutes = parseInt(moment.duration(decimalPart, 'hours').asMinutes());
 
       var fmtMinutes = justMinutes < 10 ? '0' + justMinutes : justMinutes;
-      return justHour + ':' + fmtMinutes;
+      var fmtHours   = justHour < 10 ? '0' + justHour : justHour;
+      return fmtHours + ':' + fmtMinutes;
     }
 
   }
