@@ -30,7 +30,8 @@
 
     function activate() {
 
-      vm.opMonitorService = operativeMonitorService;
+      vm.opMonitorService     = operativeMonitorService;
+      vm.getEstadoObservacion = getEstadoObservacion;
 
       vm.toggleGroup = function(group) {
         if (vm.isGroupShown(group)) {
@@ -43,6 +44,18 @@
       vm.isGroupShown = function(group) {
         return vm.shownGroup === group;
       };
+
+      function getEstadoObservacion(detail) {
+        if (parseInt(detail.activo) !== 0) return detail.estado;
+
+        if (!detail.observaciones || detail.observaciones === "") {
+          return detail.estado;
+        } else {
+          console.log('!!OBSERVACION!!');
+          console.log(detail.observaciones);
+          return detail.observaciones;
+        }
+      }
 
     }
 
