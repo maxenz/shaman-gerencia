@@ -80,3 +80,16 @@ div.list.list-no-padding {
 .padding-2 {
   padding: 2px !important;
 }
+
+div.popup-buttons {
+  & > button {
+    background-color: $balanced !important;
+  }
+}
+
+.hr-observations {
+  margin-top: 0;
+  margin-bottom:0;
+  margin-left:1%;
+  margin-right:1%;
+}

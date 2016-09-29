@@ -14,11 +14,10 @@
           <p ng-class="{'color-assertive bold' : project.desvio < 90}">{{  project.desvio.toFixed(2)  }} % de desvío</p>
         </div>
         <div class="col col-33">
-          <p class="color-balanced bold">{{ project.opeServicios }} servicios</p>
-          <p class="color-balanced bold">{{ project.espServicios }} servicios esp.</p>
+          <p class="color-balanced bold">{{ project.opeServicios.toFixed(2) }} servicios</p>
+          <p class="color-balanced bold">{{ project.espServicios.toFixed(2) }} servicios esp.</p>
         </div>
       </div>
-
     </div>
     <div class="item item-accordion no-padding" ng-repeat="det in project.detail"
     ng-show="mobilesBudgetActivityCtrl.isGroupShown(project)">
@@ -53,7 +52,9 @@
             <p><span class="color-black bold">{{  mobilesBudgetActivityCtrl.minutesToTime(det.espHoras)  }}</span></p>
             <p><span class="color-black bold">{{  det.espServicios  }}</span></p>
             <p><span class="color-black bold">{{  mobilesBudgetActivityCtrl.minutesToTime(det.espFrecuencia)  }}</span></p>
-            <p><span class="color-black bold">{{  det.desvio | number:2   }}</span></p>
+            <p><span class="bold"
+               ng-class="{'color-assertive' : det.desvio > 0, 'color-black' : det.desvio <= 0}">{{  det.desvio | number:2   }}
+             </span></p>
           </div>
         </div>
       </div>

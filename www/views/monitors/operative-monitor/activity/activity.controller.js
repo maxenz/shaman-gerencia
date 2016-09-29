@@ -51,8 +51,6 @@
         if (!detail.observaciones || detail.observaciones === "") {
           return detail.estado;
         } else {
-          console.log('!!OBSERVACION!!');
-          console.log(detail.observaciones);
           return detail.observaciones;
         }
       }

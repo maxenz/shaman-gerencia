@@ -15,7 +15,7 @@ angular.module('shaman', [
   'chart.js'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, loginService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -29,6 +29,9 @@ angular.module('shaman', [
       StatusBar.styleDefault();
     }
   });
+
+  loginService.loadUserCredentials();
+
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -104,6 +107,13 @@ angular.module('shaman', [
         controller: 'SettingsCtrl'
       }
     }
+  })
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'views/login/login.template.html',
+    controller: 'LoginCtrl',
+    controllerAs: 'loginCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

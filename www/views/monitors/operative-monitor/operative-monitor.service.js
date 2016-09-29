@@ -76,7 +76,9 @@
         service.monitors[i].detail = [];
         service.monitors[i].lessThan90PercentAccordance = parseInt(service.monitors[i].conformidad) < 90;
         for (var j = 0; j < detail.length; j++) {
-          detail[j].activeImageIcon = getActiveImageIcon(detail[j]);
+          var status = getActiveImageIcon(detail[j]);
+          detail[j].activeImageIcon = status.image;
+          detail[j].statusDescription = status.description;
           if (detail[j].tipoMovilId === service.monitors[i].id) {
             service.monitors[i].detail.push(detail[j]);
           }
@@ -98,16 +100,26 @@
     }
 
     function getActiveImageIcon(detail) {
+      var status = {};
       switch (parseInt(detail.activo)) {
         case 0:
-        return "ion-close-circled color-assertive";
+        status.image = "ion-close-circled color-assertive";
+        status.description = "Inactivo";
+        break;
         case 1:
-        return "ion-checkmark-circled color-balanced";
+        status.image =  "ion-checkmark-circled color-balanced";
+        status.description = "Activo";
+        break;
         case 2:
-        return "ion-calendar color-positive";
+        status.image =  "ion-calendar color-positive";
+        status.description = "A contratar";
+        break;
         case 3:
-        return "ion-refresh color-positive";
+        status.image =  "ion-refresh color-positive";
+        status.description = "Otra modalidad";
+        break;
       }
+      return status;
     }
 
     function setMonitorDataForChart(i) {

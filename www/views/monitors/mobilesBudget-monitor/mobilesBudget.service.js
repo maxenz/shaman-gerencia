@@ -81,6 +81,8 @@
         obj.proyecto = uniqueProjects[i];
         obj.espServicios = 0;
         obj.opeServicios = 0;
+        obj.desvio       = 0;
+        obj.cantMoviles  = 0;
         obj.detail       = [];
         chart.push(obj);
       }
@@ -92,34 +94,39 @@
       for (var i = 0; i < service.mobiles.length; i++) {
         for (var j = 0; j < chart.length; j++) {
           if (chart[j].proyecto === service.mobiles[i].proyecto) {
-            chart[j].espServicios =+ service.mobiles[i].espServicios;
-            chart[j].opeServicios =+ service.mobiles[i].opeServicios;
-            chart[j].desvio       =+ service.mobiles[i].desvio;
+            chart[j].espServicios += parseFloat(service.mobiles[i].espServicios);
+            chart[j].opeServicios += parseFloat(service.mobiles[i].opeServicios);
+            chart[j].desvio       += parseFloat(service.mobiles[i].desvio);
+            chart[j].cantMoviles++;
             chart[j].detail.push(service.mobiles[i]);
           }
         }
       }
 
+      for (var k = 0; k < chart.length; k++) {
+        var desvio = chart[k].desvio;
+        chart[k].desvio = desvio / chart[k].cantMoviles;
+      }
+
       service.dataForActivity = chart;
-      console.log(service.dataForActivity);
 
-    }
+      }
 
-    function parseDataForChart(chart) {
+      function parseDataForChart(chart) {
 
-      service.chartLabels = [];
-      service.chartEspServicios = [];
-      service.chartOpeServicios = [];
+        service.chartLabels = [];
+        service.chartEspServicios = [];
+        service.chartOpeServicios = [];
 
-      for (var i = 0; i < chart.length; i++) {
-        var proyectName = chart[i].proyecto.split(")")[1];
-        service.chartLabels.push(proyectName);
-        service.chartEspServicios.push(chart[i].espServicios);
-        service.chartOpeServicios.push(chart[i].opeServicios);
+        for (var i = 0; i < chart.length; i++) {
+          var proyectName = chart[i].proyecto.split(")")[1];
+          service.chartLabels.push(proyectName);
+          service.chartEspServicios.push(chart[i].espServicios);
+          service.chartOpeServicios.push(chart[i].opeServicios);
+        }
+
       }
 
     }
 
-  }
-
-}());
+  }());

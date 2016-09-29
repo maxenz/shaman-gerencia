@@ -25,11 +25,19 @@
     <div class="row">
       <div class="col col-33">
         <h2>Móvil {{  det.movilId  }}</h2>
-        <p>Activo <i class="icon {{ det.activeImageIcon }}"></i></p>
+        <p>{{det.statusDescription}} <i class="icon {{ det.activeImageIcon }}"></i></p>
       </div>
       <div class="col col-67">
         <p class="bold">{{  det.propietario  }}</p>
         <p class="bold">{{  operativeMonitorActivityCtrl.getEstadoObservacion(det) }} </p>
+      </div>
+    </div>
+
+    <hr class="hr-observations" ng-if="det.observaciones" />
+
+    <div class="row" ng-if="det.observaciones">
+      <div class="col col-100" style="font-size:14px">
+        <span style="font-weight:bold;font-size:14px">Observaciones: </span> {{ det.observaciones }}
       </div>
     </div>
   </div>

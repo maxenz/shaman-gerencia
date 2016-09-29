@@ -6,16 +6,21 @@
 
   .controller('MonitorsCtrl', MonitorsCtrl);
 
-  function MonitorsCtrl() {
+  MonitorsCtrl.$inject = ['loginService', '$state'];
+
+  function MonitorsCtrl(loginService, $state) {
 
     var vm = this;
 
-    var monitor1 = { id: 1, name: 'Armado Operativo' };
-    var monitor2 = { id: 2, name: 'Presupuesto de Móviles'};
+    if (!loginService.data.isAuthenticated) {
+      $state.go('login');
+    }
 
-    vm.monitors = [];
-    vm.monitors.push(monitor1);
-    vm.monitors.push(monitor2);
+    vm.monitors = [
+      { id: 1, name: 'Armado Operativo' },
+      { id: 2, name: 'Presupuesto de Móviles'},
+      { id: 3, name: 'Cupo de Prestaciones'}
+    ];
 
   }
 
