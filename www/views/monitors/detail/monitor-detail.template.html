@@ -4,7 +4,7 @@
 
       <ion-tab title="Filtros" icon-on="ion-ios-search-strong" icon-off="ion-ios-search">
         <ion-pane>
-          <ion-content>
+          <ion-content class="has-footer">
             <operative-monitor-filter ng-if="monitorDetailCtrl.showOperativeMonitor"></operative-monitor-filter>
             <mobiles-budget-filter ng-if="monitorDetailCtrl.showMobilesBudgetMonitor"></mobiles-budget-filter>
             <quota-benefits-filter ng-if="monitorDetailCtrl.showQuotaBenefitsMonitor"></quota-benefits-filter>
@@ -14,20 +14,20 @@
 
       <ion-tab title="Actividad" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
         <ion-pane>
-          <ion-content>
+          <ion-content class="has-footer">
             <operative-monitor-activity ng-if="monitorDetailCtrl.showOperativeMonitor"></operative-monitor-activity>
             <mobiles-budget-activity ng-if="monitorDetailCtrl.showMobilesBudgetMonitor"></mobiles-budget-activity>
-            <!-- <quota-benefits-activity ng-if="monitorDetailCtrl.showQuotaBenefitsMonitor"></quota-benefits-activity> -->
+            <quota-benefits-monitor-activity ng-if="monitorDetailCtrl.showQuotaBenefitsMonitor"></quota-benefits-monitor-activity>
           </ion-content>
         </ion-pane>
       </ion-tab>
 
       <ion-tab title="Gráficos" icon-on="ion-ios-pie" icon-off="ion-ios-pie-outline" on-select="ngGridFix()">
         <ion-pane>
-          <ion-content>
+          <ion-content class="has-footer">
             <operative-monitor-chart ng-if="monitorDetailCtrl.showOperativeMonitor"></operative-monitor-chart>
             <mobiles-budget-chart ng-if="monitorDetailCtrl.showMobilesBudgetMonitor"></mobiles-budget-chart>
-            <!-- <quota-benefits-chart ng-if="monitorDetailCtrl.showQuotaBenefitsMonitor"></quota-benefits-chart> -->
+            <quota-benefits-monitor-chart ng-if="monitorDetailCtrl.showQuotaBenefitsMonitor"></quota-benefits-monitor-chart>
           </ion-content>
         </ion-pane>
       </ion-tab>
