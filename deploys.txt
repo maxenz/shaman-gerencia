@@ -1,0 +1,37 @@
+-------------> Iphone Deploy
+
+En config.xml, cambiar id de aplicacion por <com.paramedic.shaman>, y agregar una version mas a la actual.
+
+Abrir un cmd, posicionarse en root del proyecto, y ejecutar ionic build ios --release.
+
+Entrar al Xcode, abrir el proyecto shamanGerencia.
+
+Hacer click en Product -> Archive.
+
+Luego cuando finalice, hacer click en Upload to Apple Store.
+
+Entrar al iosconnect, agregar una version, sus novedades y la compilacion
+(esperar 15 min hasta que me aparezca la compilacion online ya subida)
+
+
+
+/////////////////////////////////////////////////////////
+
+-------------> Android Deploy
+
+En config.xml, dejar el id de ionicframework desgraciademente, y agregar una version mas a la actual.
+
+Abrir un cmd, posicionarse en el root del proyecto y ejecutar ionic build android --release.
+
+En el mismo cmd, hacer cd platforms cd android.
+
+Ejecutar lo siguiente:
+
+ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore shamanGerencia.keystore
+  build/outputs/apk/android-release-unsigned.apk shamanGerencia
+
+  hacer cd .. cd ..
+
+  ./zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk shamanGerencia.apk
+
+  Entrar a google developer console, subir apk, agregar novedades y publicar.
