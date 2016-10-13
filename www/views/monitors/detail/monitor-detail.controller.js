@@ -27,9 +27,10 @@
 
     function activate() {
 
-      vm.showOperativeMonitor     = parseInt($stateParams.monitorId) === 1;
-      vm.showMobilesBudgetMonitor = parseInt($stateParams.monitorId) === 2;
-      vm.showQuotaBenefitsMonitor = parseInt($stateParams.monitorId) === 3;
+      vm.showOperativeMonitor               = parseInt($stateParams.monitorId) === 1;
+      vm.showMobilesBudgetMonitor           = parseInt($stateParams.monitorId) === 2;
+      vm.showQuotaBenefitsMonitor           = parseInt($stateParams.monitorId) === 3;
+      vm.showLiquidationOfObjectivesMonitor = parseInt($stateParams.monitorId) === 4;
 
       monitorService.parseMobileTypes(_mobileTypes);
       monitorService.setFilters();

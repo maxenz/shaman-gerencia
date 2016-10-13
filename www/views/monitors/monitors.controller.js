@@ -19,7 +19,8 @@
     vm.monitors = [
       { id: 1, name: 'Armado Operativo' },
       { id: 2, name: 'Presupuesto de Móviles'},
-      { id: 3, name: 'Cupo de Prestaciones'}
+      { id: 3, name: 'Cupo de Prestaciones'},
+      { id: 4, name: 'Liquidación de Objetivos'}
     ];
 
   }
